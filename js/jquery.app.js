@@ -177,8 +177,7 @@
 	};
 
 	/**
-	 * csv‚ð2ŽŸŒ³”z—ñ‚É‚µ‚Ä•Ô‚·
-	 * @param {String} s
+	 * csv string to two-dimensional array
 	 */
 	$.parseCSV = function(s){
 		var result = [];
