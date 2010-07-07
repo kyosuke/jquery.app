@@ -52,6 +52,7 @@
 		method: function(funcName, func){
 			var o = this;
 			o[funcName] = function(){
+				$.app.info(funcName, arguments);
 				var result;
 				if (typeof func === 'function') {
 					result = func.apply(o, arguments);
@@ -153,6 +154,19 @@
 		return new f();
 	};
 
+
+	$.app.debugMode = false;
+	var logMethod = ['debug', 'info', 'log', 'warn', 'error'];
+
+	$.each(logMethod, function(i, name){
+		$.app[name] = $.app.fn[name] = function(){
+			if (console && $.app.debugMode) {
+				console[name].apply(console[name], arguments);
+			}
+		}
+	});
+	
+ 
 })(jQuery);
 
 

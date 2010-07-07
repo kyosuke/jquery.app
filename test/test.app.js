@@ -3,6 +3,7 @@ if ( typeof fireunit === "object" ) {
 	QUnit.log = fireunit.ok;
 	QUnit.done = fireunit.testDone;
 }
+$.app.debugMode = true;
 
 test('create app', function(){
 	var app1 = $.app();
@@ -550,6 +551,19 @@ test('prototypeLink', function(){
 	
 	ok(child.func, 'funcメソッドが存在する')
 	ok(!child.hasOwnProperty('func'), 'funcは子のプロパティでない')
+});
+
+
+test('log', function(){
+	var a = ['debug', 'info', 'log', 'warn', 'error'];
+	$.each(a, function(i, s){
+		same(typeof $.app[s], 'function', '$.app.' + s + 'はfunction')
+	})
+	var app = $.app('test');
+	
+	$.each(a, function(i, s){
+		same(typeof app[s], 'function', 'app.' + s + 'はfunction')
+	})
 });
 
 
