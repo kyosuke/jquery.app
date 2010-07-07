@@ -4,8 +4,8 @@
  * Dual licensed under the MIT or GPL Version 2 licenses.
  */
 
-if (!console) {
-	console = {
+if (!window.console) {
+	window.console = {
 		debug: function(){},
 		info: function(){},
 		log: function(){},
