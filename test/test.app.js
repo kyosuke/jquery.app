@@ -554,18 +554,6 @@ test('prototypeLink', function(){
 });
 
 
-test('log', function(){
-	var a = ['debug', 'info', 'log', 'warn', 'error'];
-	$.each(a, function(i, s){
-		same(typeof $.app[s], 'function', '$.app.' + s + 'はfunction')
-	})
-	var app = $.app('test');
-	
-	$.each(a, function(i, s){
-		same(typeof app[s], 'function', 'app.' + s + 'はfunction')
-	})
-});
-
 
 //-----------------------------------
 

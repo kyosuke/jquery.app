@@ -4,7 +4,18 @@
  * Dual licensed under the MIT or GPL Version 2 licenses.
  */
 
+if (!console) {
+	console = {
+		debug: function(){},
+		info: function(){},
+		log: function(){},
+		warn: function(){},
+		error: function(){}
+	};
+}
+
 (function($){
+	
 	var appList = {};
 
 	$.app = function(appName){
@@ -52,7 +63,9 @@
 		method: function(funcName, func){
 			var o = this;
 			o[funcName] = function(){
-				$.app.info(funcName, arguments);
+				if ($.app.debugMode){
+					console.info(o, funcName, arguments);
+				}
 				var result;
 				if (typeof func === 'function') {
 					result = func.apply(o, arguments);
@@ -156,16 +169,6 @@
 
 
 	$.app.debugMode = false;
-	var logMethod = ['debug', 'info', 'log', 'warn', 'error'];
-
-	$.each(logMethod, function(i, name){
-		$.app[name] = $.app.fn[name] = function(){
-			if (console && $.app.debugMode) {
-				console[name].apply(console[name], arguments);
-			}
-		}
-	});
-	
  
 })(jQuery);
 
